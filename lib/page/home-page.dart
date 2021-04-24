@@ -46,109 +46,128 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Container(
-          child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(onPressed: () {
+          child: Column(children: [Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "7";
                   });
-                }, child: Text('7')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("7")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "8";
                   });
-                }, child: Text('8')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("8")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "9";
                   });
-                }, child: Text('9')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("9")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
-                    operaciones += "7";
+                    operaciones += " / ";
                   });
-                }, child: Text('/')),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("/"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "4";
                   });
-                }, child: Text('4')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("4")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "5";
                   });
-                }, child: Text('5')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("5")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "6";
                   });
-                }, child: Text('6')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("6")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
-                    operaciones += "*";
+                    operaciones += " x ";
                   });
-                }, child: Text('*')),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("x"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "1";
                   });
-                }, child: Text('1')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("1")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "2";
                   });
-                }, child: Text('2')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("2")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "3";
                   });
-                }, child: Text('3')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("3")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
-                    operaciones += "-";
+                    operaciones += " - ";
                   });
-                }, child: Text('-')),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("-"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
                     operaciones += "0";
                   });
-                }, child: Text('0')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("0")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
-                    operaciones += "";
+                    operaciones = "";
+                    resultadoOperaciones = "";
                   });
-                }, child: Text('C')),
-                ElevatedButton(onPressed: () {
-                  setState(() {                    
+                },
+                child: Text("C")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
                     getOperacion();
                   });
-                }, child: Text('=')),
-                ElevatedButton(onPressed: () {
+                },
+                child: Text("=")),
+            ElevatedButton(
+                onPressed: () {
                   setState(() {
-                     operaciones += "+";
+                    operaciones += " + ";
                   });
-                }, child: Text('+')),
-              ],
-            )
-          ]),
-        ),
+                },
+                child: Text("+"))
+          ])
+        ])),          
       ],
     );
   }
