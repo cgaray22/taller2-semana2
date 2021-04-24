@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                 }, child: Text('0')),
                 ElevatedButton(onPressed: () {
                   setState(() {
-                    operaciones += "C";
+                    operaciones += "";
                   });
                 }, child: Text('C')),
                 ElevatedButton(onPressed: () {
