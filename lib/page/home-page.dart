@@ -27,9 +27,9 @@ class _HomePageState extends State<HomePage> {
           height: 100,
         ),
         Container(
-          color: Colors.white,
           child: Column(children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(onPressed: () {}, child: Text('7')),
                 ElevatedButton(onPressed: () {}, child: Text('8')),
@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(onPressed: () {}, child: Text('4')),
                 ElevatedButton(onPressed: () {}, child: Text('5')),
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(onPressed: () {}, child: Text('1')),
                 ElevatedButton(onPressed: () {}, child: Text('2')),
@@ -54,6 +56,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(onPressed: () {}, child: Text('0')),
                 ElevatedButton(onPressed: () {}, child: Text('C')),
