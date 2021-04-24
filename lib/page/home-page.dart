@@ -7,6 +7,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String operaciones = "";
+  String resultadoOperaciones = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +23,15 @@ class _HomePageState extends State<HomePage> {
       children: [
         Expanded(
           child: Container (
-            color:Colors.red,
+            child: Row(
+              children: [
+                Text(
+                  resultadoOperaciones,
+                  textAlign: TextAlign.justify,
+                ),
+              ],
             ),
+          ),
         ),
         Container(
           color: Colors.blue,          
@@ -128,13 +136,13 @@ class _HomePageState extends State<HomePage> {
                   });
                 }, child: Text('C')),
                 ElevatedButton(onPressed: () {
-                  setState(() {
-                    operaciones += "=";
+                  setState(() {                    
+                    getOperacion();
                   });
                 }, child: Text('=')),
                 ElevatedButton(onPressed: () {
                   setState(() {
-                    operaciones += "+";
+                     operaciones += "+";
                   });
                 }, child: Text('+')),
               ],
@@ -143,5 +151,36 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+  getOperacion() {
+    try {
+      var array = operaciones.split(" ");
+      num resultado;
+      String operador = array[1].trim();
+      double x = double.parse(array[0].trim());
+      double y = double.parse(array[2].trim());
+
+      resultado = (operador == "+")
+          ? (x + y)
+          : (operador == "-")
+              ? (x - y)
+              : (operador == "x")
+                  ? (x * y)
+                  : (operador == "/")
+                      ? (x / y)
+                      : "Operación invalida";
+
+      resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+
+      setState(() {
+        resultadoOperaciones =
+            "$resultadoOperaciones\n $x $operador $y = $resultado";
+        operaciones = "$resultado";
+      });
+    } catch (e) {
+      setState(() {
+        operaciones += "\nExpresión malformada";
+      });
+    }
   }
 }
