@@ -219,6 +219,19 @@ class _HomePageState extends State<HomePage> {
           operaciones = "$resultado";
         });
       }
+      if (array[1].trim() == "√") {        
+        num resultado;
+        String operador = array[1].trim();
+        double x = double.parse(array[0].trim());
+        resultado = sqrt(x);
+        resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+        print(resultado);
+        setState(() {
+          resultadoOperaciones = 
+              "$resultadoOperaciones\n $x $operador  = $resultado";
+          operaciones = "$resultado";
+        });
+      }
       else{
         num resultado;
         String operador = array[1].trim();
