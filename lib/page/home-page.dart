@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +76,14 @@ class _HomePageState extends State<HomePage> {
                     operaciones += " / ";
                   });
                 },
-                child: Text("/"))
+                child: Text("/")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " % ";
+                  });
+                },
+                child: Text("%"))
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             ElevatedButton(
@@ -104,7 +113,14 @@ class _HomePageState extends State<HomePage> {
                     operaciones += " x ";
                   });
                 },
-                child: Text("x"))
+                child: Text("x")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " √ ";
+                  });
+                },
+                child: Text("√"))
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             ElevatedButton(
@@ -130,11 +146,18 @@ class _HomePageState extends State<HomePage> {
                 child: Text("3")),
             ElevatedButton(
                 onPressed: () {
-                  setState(() {
+                  setState(() { 
                     operaciones += " - ";
                   });
                 },
-                child: Text("-"))
+                child: Text("-")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " x² ";
+                  });
+                },
+                child: Text("x²"))
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             ElevatedButton(
@@ -155,47 +178,70 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    getOperacion();
+                    operaciones = "";
                   });
                 },
-                child: Text("=")),
+                child: Text("CE")),
             ElevatedButton(
                 onPressed: () {
                   setState(() {
                     operaciones += " + ";
                   });
                 },
-                child: Text("+"))
-          ])
+                child: Text("+")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    getOperacion();
+                  });
+                },
+                child: Text("="))
+          ])          
         ])),          
       ],
     );
   }
   getOperacion() {
     try {
-      var array = operaciones.split(" ");
-      num resultado;
-      String operador = array[1].trim();
-      double x = double.parse(array[0].trim());
-      double y = double.parse(array[2].trim());
+      var array = operaciones.split(" ");      
+      if (array[1].trim() == "x²") {        
+        num resultado;
+        String operador = array[1].trim();
+        double x = double.parse(array[0].trim());
+        resultado = (operador == "x²")
+            ? (x * x)
+            : "Operación invalida";
+        resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+        print(resultado);
+        setState(() {
+          resultadoOperaciones = 
+              "$resultadoOperaciones\n $x $operador = $resultado";
+          operaciones = "$resultado";
+        });
+      }
+      else{
+        num resultado;
+        String operador = array[1].trim();
+        double x = double.parse(array[0].trim());
+        double y = double.parse(array[2].trim());
+        resultado = (operador == "+")
+            ? (x + y)
+            : (operador == "-")
+                ? (x - y)
+                : (operador == "x")
+                    ? (x * y)
+                    : (operador == "/")
+                        ? (x / y)
+                        : "Operación invalida";
 
-      resultado = (operador == "+")
-          ? (x + y)
-          : (operador == "-")
-              ? (x - y)
-              : (operador == "x")
-                  ? (x * y)
-                  : (operador == "/")
-                      ? (x / y)
-                      : "Operación invalida";
+        resultado = resultado % 1 == 0 ? resultado.round() : resultado;
 
-      resultado = resultado % 1 == 0 ? resultado.round() : resultado;
-
-      setState(() {
-        resultadoOperaciones =
-            "$resultadoOperaciones\n $x $operador $y = $resultado";
-        operaciones = "$resultado";
-      });
+        setState(() {
+          resultadoOperaciones =
+              "$resultadoOperaciones\n $x $operador $y = $resultado";
+          operaciones = "$resultado";
+        });
+      }
     } catch (e) {
       setState(() {
         operaciones += "\nExpresión malformada";
