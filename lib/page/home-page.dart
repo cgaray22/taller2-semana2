@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    operaciones += " % ";
+                    operaciones += " %";
                   });
                 },
                 child: Text("%"))
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    operaciones += " √ ";
+                    operaciones += "√ ";
                   });
                 },
                 child: Text("√"))
@@ -202,38 +202,70 @@ class _HomePageState extends State<HomePage> {
     );
   }
   getOperacion() {
-    try {
-      var array = operaciones.split(" ");      
-      if (array[1].trim() == "x²") {        
-        num resultado;
-        String operador = array[1].trim();
+      var array = operaciones.split(" ");
+      num resultado;
+      if (!operaciones.contains(" ")) {             
+            if (array[3].trim() == "%") {
+              String operador = array[1].trim(); 
+              double x = double.parse(array[0].trim());
+              double y = double.parse(array[2].trim());              
+              double z = y / 100;              
+              resultado = x * z;
+              resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+              setState(() {
+                resultadoOperaciones = 
+                    "$resultadoOperaciones\n $x $operador = $resultado";
+                operaciones = "$resultado";
+              });
+            }  
+      }       
+      if (array[1].trim() == "x²") {
+        String operador = array[1].trim(); 
         double x = double.parse(array[0].trim());
-        resultado = (operador == "x²")
-            ? (x * x)
-            : "Operación invalida";
+        resultado = x * x;
         resultado = resultado % 1 == 0 ? resultado.round() : resultado;
-        print(resultado);
         setState(() {
           resultadoOperaciones = 
               "$resultadoOperaciones\n $x $operador = $resultado";
           operaciones = "$resultado";
         });
       }
-      if (array[1].trim() == "√") {        
-        num resultado;
-        String operador = array[1].trim();
-        double x = double.parse(array[0].trim());
+      if (array[0].trim() == "√") {
+        String operador = array[0].trim();
+        double x = double.parse(array[1].trim());
         resultado = sqrt(x);
         resultado = resultado % 1 == 0 ? resultado.round() : resultado;
-        print(resultado);
         setState(() {
           resultadoOperaciones = 
               "$resultadoOperaciones\n $x $operador  = $resultado";
           operaciones = "$resultado";
         });
       }
+      if (array[3].trim() == "%"){
+        String operador = array[1].trim();
+        double x = double.parse(array[0].trim());
+        double y = double.parse(array[2].trim());
+          double z = y / 100;
+          resultado = (operador == "+")
+            ? (x + z)
+            : (operador == "-")
+                ? (x - z)
+                : (operador == "x")
+                    ? (x * z)
+                    : (operador == "/")
+                        ? (x / z)
+                        : "Operación invalida";
+
+          resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+
+          setState(() {
+            resultadoOperaciones =
+                "$resultadoOperaciones\n $x $operador $y = $resultado";
+            operaciones = "$resultado";
+          });
+
+      }
       else{
-        num resultado;
         String operador = array[1].trim();
         double x = double.parse(array[0].trim());
         double y = double.parse(array[2].trim());
@@ -247,18 +279,17 @@ class _HomePageState extends State<HomePage> {
                         ? (x / y)
                         : "Operación invalida";
 
-        resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+            resultado = resultado % 1 == 0 ? resultado.round() : resultado;
 
-        setState(() {
-          resultadoOperaciones =
-              "$resultadoOperaciones\n $x $operador $y = $resultado";
-          operaciones = "$resultado";
-        });
+            setState(() {
+              resultadoOperaciones =
+                  "$resultadoOperaciones\n $x $operador $y = $resultado";
+              operaciones = "$resultado";
+            });
+
+        
+        
       }
-    } catch (e) {
-      setState(() {
-        operaciones += "\nExpresión malformada";
-      });
-    }
-  }
+    
+  }  
 }
