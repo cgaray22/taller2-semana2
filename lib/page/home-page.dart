@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String operaciones = "";
+  String operacion = "";
   String resultadoOperaciones = "";
   @override
   Widget build(BuildContext context) {
@@ -78,9 +79,9 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: Text("/")),
             ElevatedButton(
-                onPressed: () {
+                onPressed: () {                  
                   setState(() {
-                    operaciones += " %";
+                    porcentaje();
                   });
                 },
                 child: Text("%"))
@@ -204,21 +205,7 @@ class _HomePageState extends State<HomePage> {
   getOperacion() {
       var array = operaciones.split(" ");
       num resultado;
-      if (!operaciones.contains(" ")) {             
-            if (array[3].trim() == "%") {
-              String operador = array[1].trim(); 
-              double x = double.parse(array[0].trim());
-              double y = double.parse(array[2].trim());              
-              double z = y / 100;              
-              resultado = x * z;
-              resultado = resultado % 1 == 0 ? resultado.round() : resultado;
-              setState(() {
-                resultadoOperaciones = 
-                    "$resultadoOperaciones\n $x $operador = $resultado";
-                operaciones = "$resultado";
-              });
-            }  
-      }       
+          
       if (array[1].trim() == "x²") {
         String operador = array[1].trim(); 
         double x = double.parse(array[0].trim());
@@ -240,31 +227,7 @@ class _HomePageState extends State<HomePage> {
               "$resultadoOperaciones\n $x $operador  = $resultado";
           operaciones = "$resultado";
         });
-      }
-      if (array[3].trim() == "%"){
-        String operador = array[1].trim();
-        double x = double.parse(array[0].trim());
-        double y = double.parse(array[2].trim());
-          double z = y / 100;
-          resultado = (operador == "+")
-            ? (x + z)
-            : (operador == "-")
-                ? (x - z)
-                : (operador == "x")
-                    ? (x * z)
-                    : (operador == "/")
-                        ? (x / z)
-                        : "Operación invalida";
-
-          resultado = resultado % 1 == 0 ? resultado.round() : resultado;
-
-          setState(() {
-            resultadoOperaciones =
-                "$resultadoOperaciones\n $x $operador $y = $resultado";
-            operaciones = "$resultado";
-          });
-
-      }
+      }      
       else{
         String operador = array[1].trim();
         double x = double.parse(array[0].trim());
@@ -292,4 +255,25 @@ class _HomePageState extends State<HomePage> {
       }
     
   }  
-}
+  porcentaje(){
+    var array = operaciones.split(" ");
+    num resultado;
+    String operador = array[1].trim();
+    double x = double.parse(array[0].trim());
+    double y = double.parse(array[2].trim());
+    double z = y / 100;
+    resultado = x * z;
+        
+
+          resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+
+          setState(() {
+            resultadoOperaciones =
+                "$resultadoOperaciones\n $x $operador $y % = $resultado";
+            operaciones = "$resultado";
+          });
+
+      }
+
+  }
+  
