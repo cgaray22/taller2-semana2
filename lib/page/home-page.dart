@@ -262,8 +262,15 @@ class _HomePageState extends State<HomePage> {
     double x = double.parse(array[0].trim());
     double y = double.parse(array[2].trim());
     double z = y / 100;
-    resultado = x * z;
-        
+    resultado = (operador == "+")
+          ? (x + z)
+          : (operador == "-")
+              ? (x - z)
+              : (operador == "x")
+                  ? (x * z)
+                  : (operador == "/")
+                      ? (x / z)
+                      : "Operación invalida";
 
           resultado = resultado % 1 == 0 ? resultado.round() : resultado;
 
